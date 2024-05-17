@@ -22,4 +22,7 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updatedTime;
     private Address address;
+
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 }

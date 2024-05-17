@@ -5,6 +5,7 @@ import com.thecodealchemist.jpawithhibernate.dao.UserRepository;
 import com.thecodealchemist.jpawithhibernate.entity.Address;
 import com.thecodealchemist.jpawithhibernate.entity.Audit;
 import com.thecodealchemist.jpawithhibernate.entity.User;
+import com.thecodealchemist.jpawithhibernate.entity.UserType;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,8 +19,7 @@ public class JpawithhibernateApplication {
 	}
 
 	@Bean
-	public ApplicationRunner applicationRunner(UserRepository userRepository,
-											   AuditRepository auditRepository) {
+	public ApplicationRunner applicationRunner(UserRepository userRepository) {
 		return args -> {
 			User u1 = new User();
 			u1.setName("Demo");
@@ -31,15 +31,15 @@ public class JpawithhibernateApplication {
 			uadd.setAddress("Address");
 			u1.setAddress(uadd);
 
+			u1.setUserType(UserType.ADMIN);
+
+
 			userRepository.save(u1);
 
-			System.out.println("===========");
+			System.out.println("===================");
 
-			Thread.sleep(2*1000);
+			userRepository.findById(Long.valueOf(1)).ifPresent(System.out::print);
 
-			User u2 = userRepository.findById(Long.valueOf(1)).get();
-			u2.setName("updated");
-			userRepository.save(u2);
 
 
 		};
