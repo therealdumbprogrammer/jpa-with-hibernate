@@ -33,19 +33,15 @@ public class JpawithhibernateApplication {
 
 			userRepository.save(u1);
 
-			System.out.println("==================");
+			System.out.println("===========");
 
-			Audit a1 = new Audit();
-			a1.setTitle("Demo-A");
-			a1.setCode(101);
-			Address aadd = new Address();
-			aadd.setCity("AC");
-			aadd.setState("AS");
-			aadd.setCountry("ACN");
-			aadd.setAddress("A-Address");
-			a1.setAddress(aadd);
+			Thread.sleep(2*1000);
 
-			auditRepository.save(a1);
+			User u2 = userRepository.findById(Long.valueOf(1)).get();
+			u2.setName("updated");
+			userRepository.save(u2);
+
+
 		};
 	}
 
